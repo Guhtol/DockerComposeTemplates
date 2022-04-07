@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  rabbit:
+    image: bitnami/rabbitmq:3.9.8
+    environment:
+      - RABBITMQ_DEFAULT_USER=levelup
+      - RABBITMQ_DEFAULT_PASS=levelup
+      - RABBITMQ_PLUGINS=rabbitmq_management rabbitmq_delayed_message_exchange rabbitmq_peer_discovery_k8s rabbitmq_shovel rabbitmq_shovel_management rabbitmq_web_dispatch rabbitmq_consistent_hash_exchange rabbitmq_prometheus rabbitmq_auth_backend_oauth2
+      - RABBITMQ_COMMUNITY_PLUGINS=https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+    volumes:
+      - rabbitmq-data:/bitnami
+volumes:
+  rabbitmq-data:
